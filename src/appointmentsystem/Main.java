@@ -22,8 +22,9 @@ public class Main {
             System.out.println("2. ➤ View Appointments");
             System.out.println("3. ➤ Update Appointment");
             System.out.println("4. ➤ Delete Appointment");
-            System.out.println("5. ➤ Exit");
-            System.out.print("Select an option (1-5): ");
+            System.out.println("5. ➤ Search Appointments");
+            System.out.println("6. ➤ Exit");
+            System.out.print("Select an option (1-6): ");
             
             int choice = scanner.nextInt();
             scanner.nextLine();
@@ -47,7 +48,7 @@ public class Main {
                     System.out.print("Enter time (HH:mm:ss): ");
                     String time = scanner.nextLine();
 
-                    System.out.print("Enter notes (AM or PM: ");
+                    System.out.print("Enter notes: ");
                     String notes = scanner.nextLine();
 
                     Appointment appointment = new Appointment();
@@ -131,6 +132,32 @@ public class Main {
                     break;
 
                 case 5:
+                    System.out.println("\n--- Search Appointments ---");
+                    System.out.print("Enter name or ID to search: ");
+                    String query = scanner.nextLine();
+                    List<Appointment> searchResults = dao.searchAppointments(query);
+                    if (searchResults.isEmpty()) {
+                        System.out.println("No appointments found for the given criteria.");
+                    } else {
+                        System.out.println("=======================================");
+                        System.out.println("         SEARCH RESULTS                 ");
+                        System.out.println("=======================================");
+                        for (Appointment a : searchResults) {
+                            System.out.println("***************************************");
+                            System.out.printf("ID: %-30s%n", a.getId());
+                            System.out.printf("Name: %-28s%n", a.getName());
+                            System.out.printf("Date: %-28s%n", dateFormat.format(a.getDate()));
+                            System.out.printf("Time: %-28s%n", a.getTime());
+                            System.out.printf("Notes: %-27s%n", a.getNotes());
+                            System.out.println("***************************************");
+                        }
+                        System.out.println("=======================================");
+                        System.out.println("         END OF SEARCH RESULTS         ");
+                        System.out.println("=======================================");
+                    }
+                    break;
+
+                case 6:
                     System.out.println("Thank you for using the Appointment System. Goodbye!");
                     scanner.close();
                     return;
@@ -141,4 +168,3 @@ public class Main {
         }
     }
 }
-
