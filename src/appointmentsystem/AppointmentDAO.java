@@ -134,4 +134,17 @@ public class AppointmentDAO {
     return appointments;
 }
 
+  
+  public boolean hasConflict(java.util.Date date, String time) {
+        // Retrieve all appointments
+        List<Appointment> appointments = getAllAppointments();
+        
+        for (Appointment a : appointments) {
+            if (a.getDate().equals(date) && a.getTime().equals(time)) {
+                return true; // Conflict found
+            }
+        }
+        return false; // No conflict
+    }
 }
+
