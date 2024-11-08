@@ -143,7 +143,7 @@ public class AppointmentDAO {
             if (a.getDate().equals(date) && a.getTime().equals(time)) {
                 return true; // Conflict found
             }
-        }
+        } 
         return false; // No conflict
     }
 }

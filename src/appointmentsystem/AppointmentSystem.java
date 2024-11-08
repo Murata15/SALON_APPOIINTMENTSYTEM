@@ -130,12 +130,44 @@ public class AppointmentSystem {
                     break;
 
                 case 4:
-                    System.out.println("\n--- Delete Appointment ---");
-                    System.out.print("Enter the ID of the appointment to delete: ");
-                    int deleteId = scanner.nextInt();
-                    dao.deleteAppointment(deleteId);
-                    System.out.println("✅ Appointment deleted successfully.");
-                    break;
+                        System.out.println("\n--- Delete Appointment ---");
+                        System.out.print("Enter the name of the appointment to delete: ");
+                        String deleteQuery = scanner.nextLine();
+
+                        // Search for the appointment by name
+                        List<Appointment> appointmentsToDelete = dao.searchAppointments(deleteQuery);
+
+                        if (appointmentsToDelete.isEmpty()) {
+                            System.out.println("No appointments found with the given name.");
+                        } else {
+                            // Display the appointment information
+                            Appointment appointmentToDelete = appointmentsToDelete.get(0); // Or choose another way to select from the list
+
+                            System.out.println("=======================================");
+                            System.out.println("         APPOINTMENT INFORMATION       ");
+                            System.out.println("=======================================");
+                            System.out.printf("ID: %-30s%n", appointmentToDelete.getId());
+                            System.out.printf("Name: %-28s%n", appointmentToDelete.getName());
+                            System.out.printf("Date: %-28s%n", dateFormat.format(appointmentToDelete.getDate()));
+                            System.out.printf("Time: %-28s%n", appointmentToDelete.getTime());
+                            System.out.printf("Notes: %-27s%n", appointmentToDelete.getNotes());
+                            System.out.println("=======================================");
+
+                            // Ask for confirmation before deleting
+                            System.out.print("Are you sure you want to delete this appointment? (yes/no): ");
+                            String confirmation = scanner.nextLine();
+
+                            if (confirmation.equalsIgnoreCase("yes")) {
+                                // Proceed with deletion
+                                dao.deleteAppointment(appointmentToDelete.getId());
+                                System.out.println("✅ Appointment deleted successfully.");
+                            } else {
+                                System.out.println("❌ Deletion canceled.");
+                            }
+                        }
+                        break;
+
+
 
                 case 5:
                     System.out.println("\n--- Search Appointments ---");
