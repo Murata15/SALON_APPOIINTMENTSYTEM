@@ -13,7 +13,7 @@ public class AppointmentSystem {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
         System.out.println("==============================================");
-        System.out.println("             PEEJAY SALON STATION");
+        System.out.println("                         LuxeLoom Appointment System");
         System.out.println("==============================================");
 
         while (true) {
@@ -48,7 +48,7 @@ public class AppointmentSystem {
                     System.out.print("Enter time (HH:mm:ss): ");
                     String time = scanner.nextLine();
 
-                    // Check for conflicts
+
                     if (dao.hasConflict(date, time)) {
                         System.out.println("❌ Appointment conflict: An appointment already exists at this date and time.");
                         break;
@@ -88,7 +88,7 @@ public class AppointmentSystem {
                         }
                         
                         System.out.println("=======================================");
-                        System.out.println("         END OF APPOINTMENTS           ");
+                        System.out.println("                      END OF APPOINTMENTS           ");
                         System.out.println("=======================================");
                     }
                     break;
@@ -134,13 +134,13 @@ public class AppointmentSystem {
                         System.out.print("Enter the name of the appointment to delete: ");
                         String deleteQuery = scanner.nextLine();
 
-                        // Search for the appointment by name
+               
                         List<Appointment> appointmentsToDelete = dao.searchAppointments(deleteQuery);
 
                         if (appointmentsToDelete.isEmpty()) {
                             System.out.println("No appointments found with the given name.");
                         } else {
-                            // Display the appointment information
+    
                             Appointment appointmentToDelete = appointmentsToDelete.get(0); // Or choose another way to select from the list
 
                             System.out.println("=======================================");

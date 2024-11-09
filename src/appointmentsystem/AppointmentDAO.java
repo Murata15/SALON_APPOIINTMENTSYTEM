@@ -6,7 +6,7 @@ import java.util.List;
 
 public class AppointmentDAO {
 
-    // Method to add an appointment
+
     public void addAppointment(Appointment appointment) {
         String sql = "INSERT INTO appointments (name, date, time, notes) VALUES (?, ?, ?, ?)";
 
@@ -24,7 +24,7 @@ public class AppointmentDAO {
         }
     }
 
-    // Method to retrieve all appointments
+
     public List<Appointment> getAllAppointments() {
         List<Appointment> appointments = new ArrayList<>();
         String sql = "SELECT * FROM appointments";
@@ -50,7 +50,7 @@ public class AppointmentDAO {
         return appointments;
     }
 
-    // Method to delete an appointment by ID
+
     public void deleteAppointment(int id) {
         String sql = "DELETE FROM appointments WHERE id = ?";
 
@@ -70,7 +70,7 @@ public class AppointmentDAO {
         }
     }
 
-    // Method to update an existing appointment
+
     public void updateAppointment(Appointment appointment) {
         String sql = "UPDATE appointments SET name = ?, date = ?, time = ?, notes = ? WHERE id = ?";
 
@@ -95,7 +95,6 @@ public class AppointmentDAO {
         }
     }
 
-    // Method to search appointments by name or ID
   public List<Appointment> searchAppointments(String criteria) {
     List<Appointment> appointments = new ArrayList<>();
     String sql = "SELECT * FROM appointments WHERE name LIKE ? OR id = ?";
@@ -107,7 +106,7 @@ public class AppointmentDAO {
         String searchName = "%" + criteria + "%";
         stmt.setString(1, searchName);
         
-        // Try to parse criteria as an ID
+
         int id = -1;
         try {
             id = Integer.parseInt(criteria);
@@ -136,15 +135,15 @@ public class AppointmentDAO {
 
   
   public boolean hasConflict(java.util.Date date, String time) {
-        // Retrieve all appointments
+
         List<Appointment> appointments = getAllAppointments();
         
         for (Appointment a : appointments) {
             if (a.getDate().equals(date) && a.getTime().equals(time)) {
-                return true; // Conflict found
+                return true; 
             }
         } 
-        return false; // No conflict
+        return false; 
     }
 }
 
